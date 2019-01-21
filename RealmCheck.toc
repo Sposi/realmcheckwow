@@ -1,0 +1,7 @@
+## Interface: 80100
+## Title: RealmCheck
+## Notes: Prevents you from inviting people from certain realms of your choice
+## Author: Sposi
+## Version: 0.1
+
+realmcheck.lua
