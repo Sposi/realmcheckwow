@@ -12,14 +12,19 @@ RealmCheckAddon:SetScript("OnEvent", function (self, event, ...) if (RegisteredE
 
 function RegisteredEvents:PLAYER_LOGIN(event)
 	local test = "RealmCheckv0.1 Loaded"
-	print(test)
+	print(test .. " " .. tostring(event))
 end
 
 function RegisteredEvents:LFG_LIST_APPLICANT_LIST_UPDATED(event, hasNewPending, hasNewPendingWithData)
+	local curInstance = GetInstanceInfo()
+	local name, instType, difID, difName, maxToons, dynDif, isDyn, instMapID, instGroupSize, lfgDungID = GetInstanceInfo()
+	if string.match(tostring(difName), "Looking for Raid") then 
+		return
+	end
 	if matchFound then
 		C_LFGList.DeclineApplicant(holdApp)
 	end
-	print("LIST UPDATED")
+	print("LIST UPDATED " .. tostring(event) .. " " .. tostring(hasNewPending) .. " " .. tostring(hasNewPendingWithData))
 end
 
 function RegisteredEvents:LFG_LIST_APPLICANT_UPDATED(event, applicantID)
@@ -34,7 +39,7 @@ function RegisteredEvents:LFG_LIST_APPLICANT_UPDATED(event, applicantID)
 		end
 	end
 	print(name)
-	print("APPLICANT UPDATED")
+	print("APPLICANT UPDATED " .. tostring(event) .. " " .. tostring(applicantID))
 end
 
 for k, v in pairs(RegisteredEvents) do
